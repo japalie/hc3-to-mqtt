@@ -94,6 +94,25 @@ function Switch.isSupported(fibaroDevice)
 end
 
 -----------------------------------
+-- CentralSceneEvent
+-----------------------------------
+
+Scene = inheritFrom(PrototypeDevice)
+Scene.bridgeType = "scene"
+Scene.bridgeBinary = true
+Scene.bridgeMultilevel = false
+Scene.bridgeRead = true
+Scene.bridgeWrite = true
+
+function Scene.isSupported(fibaroDevice)
+    if (fibaroDevice.baseType == "com.fibaro.remoteSceneController" or fibaroDevice.type == "com.fibaro.remoteController") then
+        return true
+    else 
+        return false
+    end
+end
+
+-----------------------------------
 -- BINARY LIGHT
 -----------------------------------
 
@@ -394,7 +413,8 @@ deviceTypeMappings = {
     Dimmer, -- multilevel light 
     BinarySensor,
     MultilevelSensor,
-    Thermostat
+    Thermostat,
+    Scene -- scene device
 }  
 
 function identifyDevice(fibaroDevice)
